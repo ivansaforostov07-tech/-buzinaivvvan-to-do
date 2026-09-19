@@ -1,170 +1,326 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Мои задачи</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #eef2ff, #fdf2f8);
-      color: #172033; min-height: 100vh;
-    }
-    .app { width: min(720px, 92%); margin: 0 auto; padding: 55px 0; }
-    .hero { margin-bottom: 25px; }
-    .eyebrow { color: #6366f1; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: 12px; }
-    h1 { font-size: clamp(34px, 8vw, 52px); margin: 8px 0; }
-    .subtitle { color: #697386; margin: 0; font-size: 16px; }
-    .card {
-      background: rgba(255,255,255,.82); backdrop-filter: blur(14px);
-      border: 1px solid rgba(255,255,255,.9); border-radius: 24px;
-      box-shadow: 0 20px 60px rgba(50, 50, 93, .12); padding: 20px;
-    }
-    .input-row { display: flex; gap: 10px; }
-    input {
-      flex: 1; border: 1px solid #e3e7ef; border-radius: 15px; padding: 15px 16px;
-      font-size: 16px; outline: none; background: #fff;
-    }
-    input:focus { border-color: #818cf8; box-shadow: 0 0 0 4px #e0e7ff; }
-    button {
-      border: 0; border-radius: 15px; padding: 0 20px; font-size: 15px; font-weight: 700;
-      cursor: pointer; transition: transform .15s, opacity .15s;
-    }
-    button:hover { transform: translateY(-1px); }
-    .add { background: #6366f1; color: white; }
-    .toolbar { display: flex; justify-content: space-between; align-items: center; margin: 20px 3px 12px; gap: 10px; }
-    .filters { display: flex; gap: 7px; }
-    .filter { background: #fff; color: #667085; padding: 9px 12px; border: 1px solid #edf0f5; }
-    .filter.active { background: #111827; color: #fff; }
-    .clear { background: transparent; color: #ef4444; padding: 8px; }
-    ul { list-style: none; padding: 0; margin: 0; }
-    li {
-      display: flex; align-items: center; gap: 12px; background: #fff;
-      border: 1px solid #eef0f4; border-radius: 16px; padding: 14px; margin-top: 10px;
-    }
-    .check {
-      width: 23px; height: 23px; border-radius: 50%; padding: 0; flex: 0 0 23px;
-      border: 2px solid #c7cddd; background: white;
-    }
-    li.done .check { background: #6366f1; border-color: #6366f1; color: white; }
-    .text { flex: 1; word-break: break-word; }
-    li.done .text { text-decoration: line-through; color: #9aa3b2; }
-    .delete { background: transparent; color: #9aa3b2; padding: 8px; font-size: 18px; }
-    .empty { text-align: center; color: #8a93a3; padding: 35px 10px; }
-    .stats { font-size: 13px; color: #8a93a3; }
-    @media (max-width: 520px) {
-      .app { padding: 30px 0; }
-      .input-row { flex-direction: column; }
-      .add { height: 48px; }
-      .toolbar { align-items: flex-start; flex-direction: column; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>buzinaivvvan To-Do 🎃</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+min-height:100vh;
+color:#fff;
+background:
+radial-gradient(circle at 20% 10%,#ff8c00 0,transparent 25%),
+radial-gradient(circle at 80% 20%,#6b21a8 0,transparent 30%),
+linear-gradient(135deg,#120b1a,#26112f,#0d1117);
+}
+
+.app{
+width:min(720px,92%);
+margin:0 auto;
+padding:55px 0;
+}
+
+.hero{text-align:center;margin-bottom:25px}
+
+.emoji{
+font-size:55px;
+animation:float 2s infinite ease-in-out;
+}
+
+h1{
+font-size:clamp(34px,8vw,52px);
+margin:5px 0;
+text-shadow:0 0 20px #ff7b00;
+}
+
+.subtitle{
+color:#d8c7e8;
+margin-bottom:25px;
+}
+
+.card{
+background:rgba(255,255,255,.1);
+border:1px solid rgba(255,255,255,.2);
+border-radius:24px;
+padding:20px;
+backdrop-filter:blur(15px);
+box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+
+.input-row{
+display:flex;
+gap:10px;
+margin-bottom:18px;
+}
+
+input{
+flex:1;
+padding:15px;
+border:0;
+border-radius:14px;
+font-size:16px;
+outline:none;
+background:#fff;
+color:#222;
+}
+
+button{
+border:0;
+border-radius:14px;
+padding:13px 18px;
+font-weight:700;
+cursor:pointer;
+font-size:15px;
+}
+
+.add{
+background:#ff7b00;
+color:#fff;
+box-shadow:0 0 18px rgba(255,123,0,.5);
+}
+
+.filters{
+display:flex;
+gap:8px;
+margin-bottom:15px;
+flex-wrap:wrap;
+}
+
+.filter{
+background:rgba(255,255,255,.1);
+color:#fff;
+}
+
+.filter.active{
+background:#6d28d9;
+}
+
+ul{
+list-style:none;
+padding:0;
+margin:0;
+}
+
+li{
+display:flex;
+align-items:center;
+gap:12px;
+padding:14px;
+margin:10px 0;
+background:rgba(0,0,0,.25);
+border-radius:16px;
+border:1px solid rgba(255,255,255,.1);
+}
+
+li.done .text{
+text-decoration:line-through;
+opacity:.5;
+}
+
+.check{
+width:24px;
+height:24px;
+border-radius:50%;
+border:2px solid #ff8c00;
+padding:0;
+background:transparent;
+flex-shrink:0;
+}
+
+.done .check{
+background:#ff8c00;
+}
+
+.text{
+flex:1;
+word-break:break-word;
+}
+
+.delete{
+background:transparent;
+color:#ff7777;
+font-size:20px;
+padding:5px 8px;
+}
+
+.bottom{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:18px;
+color:#cbbbd8;
+font-size:14px;
+}
+
+.clear{
+background:transparent;
+color:#ff9b9b;
+}
+
+.empty{
+text-align:center;
+padding:30px;
+color:#cbbbd8;
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-8px)}
+}
+
+@media(max-width:500px){
+.input-row{flex-direction:column}
+.add{width:100%}
+}
+</style>
 </head>
+
 <body>
-  <main class="app">
-    <section class="hero">
-      <div class="eyebrow">Мой день</div>
-      <h1>Мои задачи ✨</h1>
-      <p class="subtitle">Планируй день просто и красиво.</p>
-    </section>
 
-    <section class="card">
-      <div class="input-row">
-        <input id="taskInput" type="text" placeholder="Например: сделать приложение..." maxlength="120">
-        <button class="add" id="addBtn">Добавить</button>
-      </div>
+<div class="app">
 
-      <div class="toolbar">
-        <div class="filters">
-          <button class="filter active" data-filter="all">Все</button>
-          <button class="filter" data-filter="active">Активные</button>
-          <button class="filter" data-filter="done">Готово</button>
-        </div>
-        <button class="clear" id="clearBtn">Очистить готовые</button>
-      </div>
+<div class="hero">
+<div class="emoji">🎃</div>
+<h1>buzinaivvvan To-Do</h1>
+<div class="subtitle">🍂 Осеннее Halloween-обновление 👻</div>
+</div>
 
-      <div class="stats" id="stats"></div>
-      <ul id="taskList"></ul>
-      <div class="empty" id="empty">Пока нет задач. Добавь первую 👋</div>
-    </section>
-  </main>
+<div class="card">
+
+<div class="input-row">
+<input id="input" placeholder="Напиши новую задачу...">
+<button class="add" onclick="addTask()">🎃 Добавить</button>
+</div>
+
+<div class="filters">
+<button class="filter active" onclick="setFilter('all',this)">Все</button>
+<button class="filter" onclick="setFilter('active',this)">Активные</button>
+<button class="filter" onclick="setFilter('done',this)">Выполненные</button>
+</div>
+
+<ul id="list"></ul>
+
+<div class="bottom">
+<span id="count"></span>
+<button class="clear" onclick="clearDone()">Удалить выполненные</button>
+</div>
+
+</div>
+</div>
 
 <script>
-const input = document.getElementById('taskInput');
-const list = document.getElementById('taskList');
-const empty = document.getElementById('empty');
-const stats = document.getElementById('stats');
-let tasks = JSON.parse(localStorage.getItem('todoTasks') || '[]');
-let filter = 'all';
+let tasks=JSON.parse(localStorage.getItem("buzinaivvvanTasks")||"[]");
+let filter="all";
 
-function save() {
-  localStorage.setItem('todoTasks', JSON.stringify(tasks));
-}
+const input=document.getElementById("input");
+const list=document.getElementById("list");
+const count=document.getElementById("count");
 
-function render() {
-  list.innerHTML = '';
-  const visible = tasks.filter(t =>
-    filter === 'all' ? true : filter === 'done' ? t.done : !t.done
-  );
-
-  visible.forEach(task => {
-    const li = document.createElement('li');
-    if (task.done) li.className = 'done';
-
-    const check = document.createElement('button');
-    check.className = 'check';
-    check.textContent = task.done ? '✓' : '';
-    check.onclick = () => {
-      task.done = !task.done; save(); render();
-    };
-
-    const text = document.createElement('div');
-    text.className = 'text';
-    text.textContent = task.text;
-
-    const del = document.createElement('button');
-    del.className = 'delete';
-    del.textContent = '×';
-    del.setAttribute('aria-label', 'Удалить');
-    del.onclick = () => {
-      tasks = tasks.filter(t => t.id !== task.id); save(); render();
-    };
-
-    li.append(check, text, del);
-    list.appendChild(li);
-  });
-
-  empty.style.display = visible.length ? 'none' : 'block';
-  const left = tasks.filter(t => !t.done).length;
-  stats.textContent = `${left} ${left === 1 ? 'задача' : left < 5 ? 'задачи' : 'задач'} осталось`;
-}
-
-function addTask() {
-  const text = input.value.trim();
-  if (!text) return;
-  tasks.unshift({ id: Date.now(), text, done: false });
-  input.value = ''; save(); render(); input.focus();
-}
-
-document.getElementById('addBtn').onclick = addTask;
-input.addEventListener('keydown', e => { if (e.key === 'Enter') addTask(); });
-
-document.querySelectorAll('.filter').forEach(btn => {
-  btn.onclick = () => {
-    filter = btn.dataset.filter;
-    document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    render();
-  };
+input.addEventListener("keydown",e=>{
+if(e.key==="Enter") addTask();
 });
 
-document.getElementById('clearBtn').onclick = () => {
-  tasks = tasks.filter(t => !t.done); save(); render();
-};
+function save(){
+localStorage.setItem("buzinaivvvanTasks",JSON.stringify(tasks));
+}
+
+function addTask(){
+const text=input.value.trim();
+if(!text)return;
+
+tasks.push({
+text:text,
+done:false
+});
+
+input.value="";
+save();
+render();
+}
+
+function toggleTask(i){
+tasks[i].done=!tasks[i].done;
+save();
+render();
+}
+
+function deleteTask(i){
+tasks.splice(i,1);
+save();
+render();
+}
+
+function clearDone(){
+tasks=tasks.filter(t=>!t.done);
+save();
+render();
+}
+
+function setFilter(f,button){
+filter=f;
+
+document.querySelectorAll(".filter")
+.forEach(b=>b.classList.remove("active"));
+
+button.classList.add("active");
+render();
+}
+
+function render(){
+
+list.innerHTML="";
+
+let visible=tasks.filter(t=>{
+if(filter==="active")return !t.done;
+if(filter==="done")return t.done;
+return true;
+});
+
+if(visible.length===0){
+list.innerHTML='<div class="empty">👻 Здесь пока пусто...<br>Добавь первую задачу 🎃</div>';
+}
+
+visible.forEach(t=>{
+const i=tasks.indexOf(t);
+
+const li=document.createElement("li");
+
+if(t.done)li.classList.add("done");
+
+li.innerHTML=`
+<button class="check" onclick="toggleTask(${i})">
+${t.done?"✓":""}
+</button>
+
+<span class="text">${escapeHtml(t.text)}</span>
+
+<button class="delete" onclick="deleteTask(${i})">🗑️</button>
+`;
+
+list.appendChild(li);
+});
+
+const active=tasks.filter(t=>!t.done).length;
+
+count.textContent=`Осталось задач: ${active}`;
+}
+
+function escapeHtml(text){
+return text
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+}
 
 render();
 </script>
+
 </body>
 </html>
-
